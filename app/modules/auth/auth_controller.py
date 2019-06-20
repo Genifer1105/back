@@ -24,3 +24,4 @@ def update_user():
 def get_users():
     payload = AuthService.get_users()
     return jsonify(payload)
+    

@@ -8,7 +8,7 @@ class UserRepository:
     __users = []
 
     @staticmethod
-    def create_user(user_data):
+    def create_user(user_data : User):
         db_context.session.add(user_data)
         db_context.session.commit()
 
