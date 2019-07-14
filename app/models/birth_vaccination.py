@@ -3,7 +3,7 @@ from app.repositories import db_context
 
 class birth_vaccination(db_context.Model):
 
-    __tablename__ = "Plan_vacunacional_camadas"
+    __tablename__ = "VACUNAS_CAMADAS"
 
 
       identificacion_camada  = db_context.Column(db_context.Integer, primary_key=True) 

@@ -2,7 +2,7 @@ from app.repositories import db_context
 
 class animal_vaccination(db_context.Model):
 
-    __tablename__ = "Plan_vacunacional_animal"
+    __tablename__ = "VACUNAS_ANIMALES"
 
       identificacion_animal  = db_context.Column(db_context.Integer, primary_key=True) 
       id_vacuna = db_context.Column(db_context.Integer, primary_key=True) 

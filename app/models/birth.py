@@ -2,7 +2,7 @@ from app.repositories import db_context
 
 class births(db_context.Model):
 
-    __tablename__ = "Parto"
+    __tablename__ = "PARTOS"
 
 
 identificion_animal = db_context.Column(db_context.Integer, nullable=False )

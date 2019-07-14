@@ -2,7 +2,7 @@ from app.repositories import db_context
 
 class animal(db_context.Model):
 
-    __tablename__ = "Animal"
+    __tablename__ = "ANIMALES"
 
    identificacion_animal = db_context.Column(db_context.Integer,  primary_key=True)
    id_raza = db_context.Column(db_context.Integer, nullable=False)
