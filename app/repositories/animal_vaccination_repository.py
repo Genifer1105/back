@@ -1,6 +1,6 @@
 
 
-class animalVaccinationRepository:
+class AnimalVaccinationRepository:
 
     __animalVaccination = []
 

@@ -1,6 +1,6 @@
 from app.repositories import db_context
 
-class laboratory(db_context.Model):
+class Laboratory(db_context.Model):
 
     __tablename__ = "LABORATORIOS"
 

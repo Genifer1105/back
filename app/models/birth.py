@@ -1,6 +1,6 @@
 from app.repositories import db_context
 
-class births(db_context.Model):
+class Births(db_context.Model):
 
     __tablename__ = "PARTOS"
 

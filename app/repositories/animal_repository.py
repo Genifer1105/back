@@ -1,6 +1,6 @@
 
 
-class animalRepository:
+class AnimalRepository:
 
     __animal = []
 

@@ -1,6 +1,6 @@
 
 
-class birthVaccinationRepository:
+class BirthVaccinationRepository:
 
     __birthVaccination = []
 

@@ -3,7 +3,7 @@
 
 
 
-class cagesLittersRepository:
+class CagesLittersRepository:
 
     __cagesLitters = []
 

@@ -1,6 +1,6 @@
 from app.repositories import db_context
 
-class typesService(db_context.Model):
+class TypesService(db_context.Model):
 
     __tablename__ = "TIPOS_SERVICIOS "
 

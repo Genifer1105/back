@@ -1,6 +1,6 @@
 from app.repositories import db_context
 
-class cagesBirth(db_context.Model):
+class CagesBirth(db_context.Model):
 
 
     __tablename__ = "JAULAS_PARTOS"

@@ -1,5 +1,5 @@
 
-class typeServices:
+class TypeService:
 
    __typeServices = []
 

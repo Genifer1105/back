@@ -6,7 +6,7 @@
 
 
 
-class birth:
+class BirthRepository:
 
     __births = []
 

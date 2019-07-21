@@ -1,6 +1,6 @@
 from app.repositories import db_context
 
-class raceAnimal(db_context.Model):
+class RaceAnimal(db_context.Model):
 
 
     __tablename__ = "RAZAS"

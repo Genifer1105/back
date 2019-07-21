@@ -3,7 +3,7 @@
 
 
 
-class cagesBirthsRepository:
+class RacesAnimalRepository:
 
     __races = []
 
@@ -20,3 +20,9 @@ class cagesBirthsRepository:
         races.id_raza = races_data.id_raza
         races.descripcion = races_data.descripcion
              db_context.session.commit()
+
+   @staticmethod
+    def get_racesAnimal():
+        query = text('select r.id_raza, r.descripcion from mydb.razas r where r.id_raza = r.id_raza')
+        result = db_context.engine.execute(query)
+        return [Utils.row2dict(user) for user in result]

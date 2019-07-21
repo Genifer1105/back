@@ -1,6 +1,6 @@
 from app.repositories import db_context
 
-class vaccines(db_context.Model):
+class Vaccines(db_context.Model):
 
 
     __tablename__ = "VACUNAS"

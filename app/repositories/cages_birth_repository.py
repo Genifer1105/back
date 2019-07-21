@@ -2,7 +2,7 @@
 
 
 
-class cagesBirthsRepository:
+class CagesBirthsRepository:
 
     __cagesBirths = []
 
