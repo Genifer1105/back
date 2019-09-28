@@ -1,0 +1,2 @@
+from app.modules.animales.animal_service import AnimalService
+from app.modules.animales.animal_controller import animal_blueprint

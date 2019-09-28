@@ -20,3 +20,5 @@ class Application:
     def register_routes(app: Flask):
         from app.modules.auth import auth_blueprint
         app.register_blueprint(auth_blueprint, url_prefix='/auth')
+        from app.modules.animales import animal_blueprint
+        app.register_blueprint(animal_blueprint, url_prefix='/animales')

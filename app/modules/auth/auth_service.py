@@ -37,17 +37,17 @@ class AuthService:
         contrasena = user_data.get('contrasena')
         id_perfil = user_data.get('id_perfil')
         telefono = user_data.get('telefono')
-        if (not AuthService.__validate_user_data(identificacion, nombre, apellido1, apellido2, correo, contrasena, id_perfil, telefono)):
+        if (not AuthService.__validate_user_data_update(identificacion, nombre, apellido1, apellido2, correo, contrasena, id_perfil, telefono)):
                 raise Exception('invalid arguments')
         user = User(
             identificacion = identificacion,
-            nombre = str.strip(nombre),
-            apellido1 = str.strip(apellido1),
-            apellido2 = apellido2 if not apellido2 else str.strip(apellido2),
-            correo = str.strip(correo),
+            nombre = str.strip(nombre) if nombre else None,
+            apellido1 = str.strip(apellido1) if apellido1 else None,
+            apellido2 = str.strip(apellido2) if apellido2 else None,
+            correo = str.strip(correo) if correo else None,
             contrasena = contrasena,
             id_perfil = id_perfil,
-            telefono = telefono if not telefono else str.strip(telefono)
+            telefono = str.strip(telefono) if telefono else None
         )
         UserRepository.update_user(user)
 
@@ -60,11 +60,24 @@ class AuthService:
     def __validate_user_data(identificacion, nombre, apellido1, apellido2, correo, contrasena, id_perfil, telefono) -> bool:
         return (
             isinstance(identificacion, int) 
-            or isinstance(nombre, str)
-            or isinstance(apellido1, str)
-            or (not apellido2 or isinstance(apellido2, str))
-            or isinstance(correo, str)
-            or isinstance(contrasena, str)
-            or isinstance(id_perfil, int)
-            or (not telefono or isinstance(telefono, str))
+            and isinstance(nombre, str)
+            and isinstance(apellido1, str)
+            and (apellido2 is None or isinstance(apellido2, str))
+            and isinstance(correo, str)
+            and isinstance(contrasena, str)
+            and isinstance(id_perfil, int)
+            and (telefono is None or isinstance(telefono, str))
+        )
+
+    @staticmethod
+    def __validate_user_data_update(identificacion, nombre, apellido1, apellido2, correo, contrasena, id_perfil, telefono) -> bool:
+        return (
+            (identificacion is None or isinstance(identificacion, int))
+            and (nombre is None or isinstance(nombre, str))
+            and (apellido1 is None or isinstance(apellido1, str))
+            and (apellido2 is None or isinstance(apellido2, str))
+            and (correo is None or isinstance(correo, str))
+            and (contrasena is None or isinstance(contrasena, str))
+            and (id_perfil is None or isinstance(id_perfil, int))
+            and (telefono is None or isinstance(telefono, str))
         )

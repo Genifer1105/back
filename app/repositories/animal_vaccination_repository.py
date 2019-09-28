@@ -9,7 +9,7 @@ class AnimalVaccinationRepository:
         db_context.session.add(animalVaccination_data)
         db_context.session.commit()
         
-     @staticmethod
+    @staticmethod
     def update_animalVaccination(animalVaccination_data: VACUNAS_ANIMALES):
         animalVaccination: VACUNAS_ANIMALES = VACUNAS_ANIMALES.query.filter_by(identificacion_animal
         = animalVaccination_data.identificacion_animal).first()

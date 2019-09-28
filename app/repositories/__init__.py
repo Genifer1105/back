@@ -1,15 +1,15 @@
 from app.repositories.db_context import db_context
 from app.repositories.util import Utils
 from app.repositories.users_repository import UserRepository
-from app.repositories.animal_repositoriy import AnimalRepository
-from app.repositories.animal_vaccination_repository from AnimalVaccinationRepository
-from app.repositories.birth_repository from BirthRepository
-from app.repositories.birth_vaccination_repository from BirthVaccinationRepository
-from app.repositories.cages_birth_repository from CagesBirthsRepository
-from app.repositories.cages_litters_repository from CagesLittersRepository
-from app.repositories.races_animal_repository from RacesAnimalRepository
-from app.repositories.type_service_repository from TypeService
-from app.repositories.vaccines_repository from VaccinesRepository
-from app.repositories.via_application from ViaApplicationRepository
-from app.repositories.profile_repository from ProfileRepository 
-from app.repositories.labotaroty_repository from LaboratoryRepository
+from app.repositories.animal_repository import AnimalRepository
+# from app.repositories.animal_vaccination_repository import AnimalVaccinationRepository
+# from app.repositories.birth_repository import BirthRepository
+# from app.repositories.birth_vaccination_repository import BirthVaccinationRepository
+# from app.repositories.cages_birth_repository import CagesBirthsRepository
+# from app.repositories.cages_litters_repository import CagesLittersRepository
+# from app.repositories.races_animal_repository import RacesAnimalRepository
+# from app.repositories.type_service_repository import TypeService
+# from app.repositories.vaccines_repository import VaccinesRepository
+# from app.repositories.via_application import ViaApplicationRepository
+# from app.repositories.profile_repository import ProfileRepository 
+# from app.repositories.labotaroty_repository import LaboratoryRepository

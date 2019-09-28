@@ -10,4 +10,4 @@ from app.models.laboratory import Laboratory
 from app.models.race_animal import RaceAnimal
 from app.models.type_service import TypesService
 from app.models.vaccines import Vaccines
-from app.models.via_aplication import ViaApplication
+from app.models.via_application import ViaApplication
