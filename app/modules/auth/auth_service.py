@@ -1,20 +1,19 @@
 from app.models import User
 from app.repositories import UserRepository
+from app.utils import Utils
 
 class AuthService:
 
     @staticmethod
     def create_user(user_data: dict):
-        identificacion = user_data.get('identificacion')
-        nombre = user_data.get('nombre')
-        apellido1 = user_data.get('apellido1')
-        apellido2 = user_data.get('apellido2')
-        correo = user_data.get('correo')
-        contrasena = user_data.get('contrasena')
-        id_perfil = user_data.get('id_perfil')
-        telefono = user_data.get('telefono')
-        if (not AuthService.__validate_user_data(identificacion, nombre, apellido1, apellido2, correo, contrasena, id_perfil, telefono)):
-                raise Exception('invalid arguments')
+        identificacion = Utils.validate_json_field(user_data, 'identificacion', int, True)
+        nombre = Utils.validate_json_field(user_data, 'nombre', str, True)
+        apellido1 = Utils.validate_json_field(user_data, 'apellido1', str, True)
+        apellido2 = Utils.validate_json_field(user_data, 'apellido2', str, False)
+        correo = Utils.validate_json_field(user_data, 'correo', str, True)
+        contrasena = Utils.validate_json_field(user_data, 'contrasena', str, True)
+        id_perfil = Utils.validate_json_field(user_data, 'id_perfil', int, True)
+        telefono = Utils.validate_json_field(user_data, 'telefono', str, False)
         user = User(
             identificacion = identificacion,
             nombre = str.strip(nombre),
@@ -26,19 +25,19 @@ class AuthService:
             telefono = telefono if not telefono else str.strip(telefono)
         )
         UserRepository.create_user(user)
+        userCreated = UserRepository.get_user(identificacion) 
+        return userCreated.serialize()
 
     @staticmethod
-    def update_user(user_data):
-        identificacion = user_data.get('identificacion')
-        nombre = user_data.get('nombre')
-        apellido1 = user_data.get('apellido1')
-        apellido2 = user_data.get('apellido2')
-        correo = user_data.get('correo')
-        contrasena = user_data.get('contrasena')
-        id_perfil = user_data.get('id_perfil')
-        telefono = user_data.get('telefono')
-        if (not AuthService.__validate_user_data_update(identificacion, nombre, apellido1, apellido2, correo, contrasena, id_perfil, telefono)):
-                raise Exception('invalid arguments')
+    def update_user(user_data, identificacion):
+        identificacion = Utils.validate_field(identificacion, 'identificacion', int, False)
+        nombre = Utils.validate_json_field(user_data, 'nombre', str, False)
+        apellido1 = Utils.validate_json_field(user_data, 'apellido1', str, False)
+        apellido2 = Utils.validate_json_field(user_data, 'apellido2', str, False)
+        correo = Utils.validate_json_field(user_data, 'correo', str, False)
+        contrasena = Utils.validate_json_field(user_data, 'contrasena', str, False)
+        id_perfil = Utils.validate_json_field(user_data, 'id_perfil', int, False)
+        telefono = Utils.validate_json_field(user_data, 'telefono', str, False)
         user = User(
             identificacion = identificacion,
             nombre = str.strip(nombre) if nombre else None,
@@ -50,6 +49,8 @@ class AuthService:
             telefono = str.strip(telefono) if telefono else None
         )
         UserRepository.update_user(user)
+        userUpdated = UserRepository.get_user(identificacion) 
+        return userUpdated.serialize()
 
     @staticmethod
     def get_users():
@@ -66,18 +67,5 @@ class AuthService:
             and isinstance(correo, str)
             and isinstance(contrasena, str)
             and isinstance(id_perfil, int)
-            and (telefono is None or isinstance(telefono, str))
-        )
-
-    @staticmethod
-    def __validate_user_data_update(identificacion, nombre, apellido1, apellido2, correo, contrasena, id_perfil, telefono) -> bool:
-        return (
-            (identificacion is None or isinstance(identificacion, int))
-            and (nombre is None or isinstance(nombre, str))
-            and (apellido1 is None or isinstance(apellido1, str))
-            and (apellido2 is None or isinstance(apellido2, str))
-            and (correo is None or isinstance(correo, str))
-            and (contrasena is None or isinstance(contrasena, str))
-            and (id_perfil is None or isinstance(id_perfil, int))
             and (telefono is None or isinstance(telefono, str))
         )
