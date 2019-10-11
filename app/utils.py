@@ -1,4 +1,5 @@
 from werkzeug.exceptions import BadRequest
+from datetime import datetime
 
 class Utils:
 
@@ -15,7 +16,14 @@ class Utils:
         elif not isinstance(field, field_type):
             raise BadRequest(f"field { field_key } must be { Utils.get_type_as_str(field_type) }")
         return field
-   
+    
+    @staticmethod
+    def convert_to_date(date_str: str, date_format: str):
+        try:
+            return datetime.strptime(date_str, date_format).date()
+        except ValueError:
+            raise BadRequest("field doesn't match the format")
+
     @staticmethod
     def get_type_as_str(field_type: type):
         if field_type == str:

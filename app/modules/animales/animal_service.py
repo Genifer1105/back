@@ -2,24 +2,16 @@ from app.repositories import AnimalRepository
 from app.models import Animal
 from datetime import datetime
 from datetime import date
+from app.utils import Utils
 
 class AnimalService:
 
     @staticmethod
-    def create_animal(animal_data: dict):
-        identificacion_animal = animal_data.get('identificacion_animal')
-        id_raza = animal_data.get('id_raza')
-        fecha_nacimiento = animal_data.get('fecha_nacimiento')
-        id_madre = animal_data.get('id_madre')
-        id_padre = animal_data.get('id_padre')
-        procedencia = animal_data.get('procedencia')
-        fecha_date = datetime.strptime(fecha_nacimiento, '%Y-%m-%d').date()
-        if (not AnimalService.__validate_animal_data(identificacion_animal, id_raza, fecha_date, id_madre, id_padre, procedencia)):
-            raise Exception('invalid arguments')
+    def create_animal(identificacion_animal: int, id_raza: int, id_madre: int, id_padre: int, procedencia: int, fecha_nacimiento_date: date):
         animal = Animal(
             identificacion_animal=identificacion_animal,
             id_raza=id_raza,
-            fecha_nacimiento=fecha_date,
+            fecha_nacimiento=fecha_nacimiento_date,
             id_madre=id_madre,
             id_padre=id_padre,
             procedencia=procedencia
@@ -27,24 +19,16 @@ class AnimalService:
         AnimalRepository.create_animal(animal)
 
     @staticmethod
-    def update_animal(animal_data: dict):
-        identificacion_animal = animal_data.get('identificacion_animal')
-        id_raza = animal_data.get('id_raza')
-        fecha_nacimiento = animal_data.get('fecha_nacimiento')
-        id_madre = animal_data.get('id_madre')
-        id_padre = animal_data.get('id_padre')
-        procedencia = animal_data.get('procedencia')
-        fecha_date = datetime.strptime(fecha_nacimiento, '%Y-%m-%d').date()
-        if (not AnimalService.__validate_animal_data(identificacion_animal, id_raza, fecha_date, id_madre, id_padre, procedencia)):
-            raise Exception('invalid arguments')
+    def update_animal(identificacion_animal: int, id_raza: int, id_madre: int, id_padre: int, procedencia: int, fecha_nacimiento_date: date):
         animal = Animal(
             identificacion_animal=identificacion_animal,
             id_raza=id_raza,
-            fecha_nacimiento=fecha_date,
+            fecha_nacimiento=fecha_nacimiento_date,
             id_madre=id_madre,
             id_padre=id_padre,
             procedencia=procedencia
         )
+        AnimalRepository.update_animal(animal_data)
 
     @staticmethod
     def get_animals():

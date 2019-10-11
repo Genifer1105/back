@@ -10,6 +10,7 @@ class UserRepository:
 
     @staticmethod
     def create_user(user_data : User):
+        print('create_user', User.identificacion)
         db_context.session.add(user_data)
         db_context.session.commit()
 
@@ -26,6 +27,7 @@ class UserRepository:
 
     @staticmethod
     def get_user(identificacion: int):
+        print('get_user', identificacion)
         user: User = User.query.filter_by(identificacion=identificacion).first()
         if not user:
             raise NotFound('user doesn\'t exist')
