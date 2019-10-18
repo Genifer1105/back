@@ -48,3 +48,7 @@ class UserRepository:
         query = text('select u.identificacion, u.nombre, u.apellido1, u.apellido2, u.correo, u.telefono, p.descripcion as perfil, u.id_perfil from ppi.usuario u, ppi.perfil p where u.id_perfil = p.id_perfil')
         result = db_context.engine.execute(query)
         return [Utils.row2dict(user) for user in result]
+
+    @staticmethod
+    def delete_user(identificacion: int):
+        pass
