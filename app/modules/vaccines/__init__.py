@@ -1,0 +1,2 @@
+from app.modules.vaccines.vaccine_service import VaccineService
+from app.modules.vaccines.vaccine_controller import vaccines_blueprint

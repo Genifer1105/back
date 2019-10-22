@@ -1,5 +1,5 @@
 from app.repositories import db_context
-
+# from app.models import Animal
 class AnimalVaccination(db_context.Model):
 
     __tablename__ = "VACUNAS_ANIMALES"
@@ -15,6 +15,8 @@ class AnimalVaccination(db_context.Model):
     reg_ica = db_context.Column(db_context.String(100), nullable=False)
     nro_lote = db_context.Column(db_context.String(100), nullable=False)  
     tiempo_retiro = db_context.Column(db_context.String(100), nullable=True)
-    observaciones = db_context.Column(db_context.String(200), nullable=True)  
+    observaciones = db_context.Column(db_context.String(200), nullable=True)
+    # animal = db_context.relationship('Animal', backref="VACUNAS_ANIMALES", lazy='noload')
+
 
 

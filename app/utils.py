@@ -6,15 +6,16 @@ class Utils:
     @staticmethod
     def validate_json_field(json: dict, field_key: str, required: bool, field_type: type):
         field = json.get(field_key, None)
-        return Utils.validate_field(field, field_key, required, field_type)
+        return Utils.validate_field(field, field_key, field_type, required)
     
     @staticmethod
     def validate_field(field, field_key: str, field_type: type, required: bool):
+        print("field_type:", field_type)
         if not field:
             if required:
                 raise BadRequest(f"field { field_key } is required")
         elif not isinstance(field, field_type):
-            raise BadRequest(f"field { field_key } must be { Utils.get_type_as_str(field_type) }")
+            raise BadRequest(f"field { field_key } must be { Utils._get_type_as_str(field_type) }")
         return field
     
     @staticmethod
@@ -25,7 +26,7 @@ class Utils:
             raise BadRequest("field doesn't match the format")
 
     @staticmethod
-    def get_type_as_str(field_type: type):
+    def _get_type_as_str(field_type: type):
         if field_type == str:
             return 'string'
         elif field_type == int:

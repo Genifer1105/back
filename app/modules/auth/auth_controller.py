@@ -5,11 +5,6 @@ from app.utils import Utils
 
 auth_blueprint = Blueprint('/auth', __name__)
 
-@auth_blueprint.route('/hola', methods=['GET'])
-def hola():
-    payload = { "message": "Holii =)" }
-    return jsonify(payload)
-
 @auth_blueprint.route('/create_user', methods=['POST'])
 def create_user():
     user_data = request.json
@@ -29,13 +24,15 @@ def create_user():
 @auth_blueprint.route('/update_user/<identificacion>', methods=['PUT'])
 def update_user(identificacion):
     user_data = request.json
-    identificacion = Utils.validate_field(identificacion, 'identificacion', int, True)
-    nombre = Utils.validate_json_field(user_data, 'nombre', str, False)
-    apellido1 = Utils.validate_json_field(user_data, 'apellido1', str, False)
-    apellido2 = Utils.validate_json_field(user_data, 'apellido2', str, False)
-    correo = Utils.validate_json_field(user_data, 'correo', str, False)
-    id_perfil = Utils.validate_json_field(user_data, 'id_perfil', int, False)
-    telefono = Utils.validate_json_field(user_data, 'telefono', str, False)
+    if not user_data:
+        raise BadRequest()
+    # identificacion = Utils.validate_field(identificacion, 'identificacion', int, True)
+    nombre = Utils.validate_json_field(user_data, 'nombre', False, str)
+    apellido1 = Utils.validate_json_field(user_data, 'apellido1', False, str)
+    apellido2 = Utils.validate_json_field(user_data, 'apellido2', False, str)
+    correo = Utils.validate_json_field(user_data, 'correo', False, str)
+    id_perfil = Utils.validate_json_field(user_data, 'id_perfil', False, int)
+    telefono = Utils.validate_json_field(user_data, 'telefono', False, str)
     data = AuthService.update_user(identificacion, nombre, apellido1, apellido2, correo, id_perfil, telefono)
     return jsonify({ "success": True, "data": data })
 
