@@ -22,7 +22,7 @@ class AnimalRepository:
         animal_model = AnimalRepository._get_animal_model(animal_data.identificacion_animal)
         if not animal_model:
             raise NotFound('Animal doesn\'t exist')
-        animal_model.id_raza = animal_data.id_raza or animal_model.id_raza
+        animal_model.raza = animal_data.raza or animal_model.raza
         animal_model.fecha_nacimiento = animal_data.fecha_nacimiento or animal_model.fecha_nacimiento
         animal_model.id_madre = animal_data.id_madre or animal_model.id_madre
         animal_model.id_padre = animal_data.id_padre or animal_model.id_padre
@@ -32,7 +32,8 @@ class AnimalRepository:
     @staticmethod
     def get_animals():
         query_result = db_context.session.query(Animal)\
-                .options(joinedload(Animal.raza))\
+                .options(joinedload(Animal.madre))\
+                .options(joinedload(Animal.padre))\
                 .all()
         results = [animal.serialized for animal in query_result]
         return results

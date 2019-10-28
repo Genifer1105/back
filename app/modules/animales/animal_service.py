@@ -7,10 +7,10 @@ from app.utils import Utils
 class AnimalService:
 
     @staticmethod
-    def create_animal(identificacion_animal: int, id_raza: int, id_madre: int, id_padre: int, procedencia: int, fecha_nacimiento_date: date):
+    def create_animal(identificacion_animal: int, raza: str, id_madre: int, id_padre: int, procedencia: int, fecha_nacimiento_date: date):
         animal = Animal(
             identificacion_animal=identificacion_animal,
-            id_raza=id_raza,
+            raza=raza,
             fecha_nacimiento=fecha_nacimiento_date,
             id_madre=id_madre,
             id_padre=id_padre,
@@ -21,10 +21,10 @@ class AnimalService:
         return animal_created
 
     @staticmethod
-    def update_animal(identificacion_animal: int, id_raza: int, id_madre: int, id_padre: int, procedencia: int, fecha_nacimiento_date: date):
+    def update_animal(identificacion_animal: int, raza: str, id_madre: int, id_padre: int, procedencia: int, fecha_nacimiento_date: date):
         animal_data = Animal(
             identificacion_animal=identificacion_animal,
-            id_raza=id_raza,
+            raza=raza,
             fecha_nacimiento=fecha_nacimiento_date,
             id_madre=id_madre,
             id_padre=id_padre,
@@ -44,7 +44,7 @@ class AnimalService:
         
 
     @staticmethod
-    def __validate_animal_data(identificacion_animal, id_raza, fecha_nacimiento, id_madre, id_padre, procedencia):
+    def __validate_animal_data(identificacion_animal, raza: str, fecha_nacimiento, id_madre, id_padre, procedencia):
         return (
             isinstance(identificacion_animal, int)
             and isinstance(id_raza, int)
