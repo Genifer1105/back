@@ -32,8 +32,6 @@ class AnimalRepository:
     @staticmethod
     def get_animals():
         query_result = db_context.session.query(Animal)\
-                .options(joinedload(Animal.madre))\
-                .options(joinedload(Animal.padre))\
                 .all()
         results = [animal.serialized for animal in query_result]
         return results
@@ -49,6 +47,5 @@ class AnimalRepository:
     @staticmethod
     def _get_animal_model(identificacion_animal: int):
         animal_model = db_context.session.query(Animal)\
-            .options(joinedload(Animal.raza))\
             .get(identificacion_animal)
         return animal_model

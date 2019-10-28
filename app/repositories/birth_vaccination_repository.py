@@ -23,8 +23,8 @@ class BirthVaccinationRepository:
             birthVaccination.id_via_aplicacion = birthVaccination_data.id_via_aplicacion
             birthVaccination.dosis = birthVaccination_data.dosis
             birthVaccination.id_laboratorio = birthVaccination_data.id_laboratorio
-            birthVaccination.reg_ica = birthVaccination_data.reg_ica
-            birthVaccination.nro_lote = birthVaccination_data.nro_lote
+            birthVaccination.registro_ica = birthVaccination_data.registro_ica
+            birthVaccination.numero_lote = birthVaccination_data.numero_lote
             birthVaccination.tiempo_retiro = birthVaccination_data.tiempo_retiro
             birthVaccination.observaciones = birthVaccination_data.observaciones  
         db_context.session.commit()

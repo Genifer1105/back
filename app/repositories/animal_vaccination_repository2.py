@@ -36,8 +36,8 @@ class AnimalVaccinationRepository:
         animal_vaccination.id_via_aplicacion =  animal_vaccination_data.id_via_aplicacion
         animal_vaccination.dosis =  animal_vaccination_data.dosis
         animal_vaccination.id_laboratorio =  animal_vaccination_data.id_laboratorio
-        animal_vaccination.reg_ica =  animal_vaccination_data.reg_ica
-        animal_vaccination.nro_lote =  animal_vaccination_data.nro_lote
+        animal_vaccination.registro_ica =  animal_vaccination_data.registro_ica
+        animal_vaccination.numero_lote =  animal_vaccination_data.numero_lote
         animal_vaccination.tiempo_retiro =  animal_vaccination_data.tiempo_retiro
         animal_vaccination.observaciones =  animal_vaccination_data.observaciones
         db_context.session.commit()

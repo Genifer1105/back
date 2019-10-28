@@ -29,8 +29,10 @@ class Application:
         app.register_blueprint(auth_blueprint, url_prefix='/auth')
         from app.modules.animales import animal_blueprint
         app.register_blueprint(animal_blueprint, url_prefix='/animales')
-        from app.modules.vaccines import vaccines_blueprint
-        app.register_blueprint(vaccines_blueprint, url_prefix='/vaccines')
+        # from app.modules.vaccines import vaccines_blueprint
+        # app.register_blueprint(vaccines_blueprint, url_prefix='/vaccines')
+        from app.modules.animals_vaccination import animal_vaccination_blueprint
+        app.register_blueprint(animal_vaccination_blueprint, url_prefix='/animals_vaccination')
 
     @staticmethod
     def error_handler(error):

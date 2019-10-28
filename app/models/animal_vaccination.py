@@ -11,8 +11,8 @@ class AnimalVaccination(db_context.Model):
     via_aplicacion = db_context.Column(db_context.String(100), nullable=False) 
     dosis = db_context.Column(db_context.Integer, nullable=False) 
     laboratorio = db_context.Column(db_context.String(100), nullable=False) 
-    reg_ica = db_context.Column(db_context.String(100), nullable=False)
-    nro_lote = db_context.Column(db_context.String(100), nullable=False)  
+    registro_ica = db_context.Column(db_context.String(100), nullable=False)
+    numero_lote = db_context.Column(db_context.String(100), nullable=False)  
     tiempo_retiro = db_context.Column(db_context.String(100), nullable=True)
     observaciones = db_context.Column(db_context.String(200), nullable=True)
     animal = db_context.relationship('Animal', backref="PLAN_VACUNACIONAL_ANIMAL", uselist=False, lazy='noload')
@@ -21,15 +21,15 @@ class AnimalVaccination(db_context.Model):
     def serialized(self):
         return {
             'identificacion_animal': self.identificacion_animal,
-            'id_vacuna': self.id_vacuna,
+            'vacuna': self.vacuna,
             'fecha_programada': self.fecha_programada,
             'evento': self.evento,
             'fecha_ejecucion': self.fecha_ejecucion,
-            'id_via_aplicacion': self.id_via_aplicacion,
+            'via_aplicacion': self.via_aplicacion,
             'dosis': self.dosis,
-            'id_laboratorio': self.id_laboratorio,
-            'reg_ica': self.reg_ica,
-            'nro_lote': self.nro_lote,
+            'laboratorio': self.laboratorio,
+            'registro_ica': self.registro_ica,
+            'numero_lote': self.numero_lote,
             'tiempo_retiro': self.tiempo_retiro,
             'observaciones': self.observaciones,
             'animal': self.animal.serialized if self.animal else None,

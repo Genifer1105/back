@@ -4,6 +4,7 @@ from sqlalchemy import text
 from sqlalchemy.orm import joinedload
 from werkzeug.exceptions import NotFound, Forbidden
 from datetime import datetime
+from app.repositories import Utils
 
 class AnimalVaccinationRepository:
 
@@ -38,8 +39,8 @@ class AnimalVaccinationRepository:
         animal_vaccination_model.via_aplicacion =  animal_vaccination_data.via_aplicacion
         animal_vaccination_model.dosis =  animal_vaccination_data.dosis
         animal_vaccination_model.laboratorio =  animal_vaccination_data.laboratorio
-        animal_vaccination_model.reg_ica =  animal_vaccination_data.reg_ica
-        animal_vaccination_model.nro_lote =  animal_vaccination_data.nro_lote
+        animal_vaccination_model.registro_ica =  animal_vaccination_data.registro_ica
+        animal_vaccination_model.numero_lote =  animal_vaccination_data.numero_lote
         animal_vaccination_model.tiempo_retiro =  animal_vaccination_data.tiempo_retiro
         animal_vaccination_model.observaciones =  animal_vaccination_data.observaciones
         db_context.session.commit()
@@ -54,20 +55,23 @@ class AnimalVaccinationRepository:
 
     @staticmethod
     def get_animal_vaccinations(identificacion_animal: int):
-        animal_vaccination_model = db_context.session.query(AnimalVaccination)\
-            .filter(identificacion_animal=identificacion_animal)\
-            .options(joinedload(AnimalVaccination.animal))
-        if not animal_vaccination_model:
-            raise NotFound('Animal Vaccination item doesn\'t exist')
-        return animal_vaccination_model.serialized
-    
+        query_result = db_context.session.query(AnimalVaccination)\
+            .filter(AnimalVaccination.identificacion_animal == identificacion_animal)\
+            .all()
+        results = [ row.serialized for row in query_result ]
+        return results
+
+    @staticmethod
+    def get_animal_vaccinations_item(identificacion_animal: int, vacuna: str, fecha_programada):
+        animal_model = AnimalVaccinationRepository._get_animal_vaccination_model(identificacion_animal, vacuna, fecha_programada)
+        return animal_model.serialized
 
     @staticmethod
     def _get_animal_vaccination_model(identificacion_animal: int, vacuna: str, fecha_programada):
         animal_model = db_context.session.query(AnimalVaccination)\
             .options(joinedload(AnimalVaccination.animal))\
             .get({
-                "identifiacion_animal": identificacion_animal,
+                "identificacion_animal": identificacion_animal,
                 "vacuna": vacuna,
                 "fecha_programada": fecha_programada
             })
