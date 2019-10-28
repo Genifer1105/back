@@ -31,18 +31,15 @@ class AnimalVaccinationRepository:
         )
         if not animal_vaccination_model:
             raise NotFound('Animal Vaccination item doesn\'t exist')
-        animal_vaccination_model.identificacion_animal =  animal_vaccination_data.identificacion_animal
-        animal_vaccination_model.vacuna =  animal_vaccination_data.vacuna
-        animal_vaccination_model.fecha_programada =  animal_vaccination_data.fecha_programada
-        animal_vaccination_model.evento =  animal_vaccination_data.evento
-        animal_vaccination_model.fecha_ejecucion =  animal_vaccination_data.fecha_ejecucion
-        animal_vaccination_model.via_aplicacion =  animal_vaccination_data.via_aplicacion
-        animal_vaccination_model.dosis =  animal_vaccination_data.dosis
-        animal_vaccination_model.laboratorio =  animal_vaccination_data.laboratorio
-        animal_vaccination_model.registro_ica =  animal_vaccination_data.registro_ica
-        animal_vaccination_model.numero_lote =  animal_vaccination_data.numero_lote
-        animal_vaccination_model.tiempo_retiro =  animal_vaccination_data.tiempo_retiro
-        animal_vaccination_model.observaciones =  animal_vaccination_data.observaciones
+        animal_vaccination_model.evento =  animal_vaccination_data.evento or animal_vaccination_model.evento
+        animal_vaccination_model.fecha_ejecucion =  animal_vaccination_data.fecha_ejecucion or animal_vaccination_model.fecha_ejecucion
+        animal_vaccination_model.via_aplicacion =  animal_vaccination_data.via_aplicacion or animal_vaccination_model.via_aplicacion
+        animal_vaccination_model.dosis =  animal_vaccination_data.dosis or animal_vaccination_model.dosis
+        animal_vaccination_model.laboratorio =  animal_vaccination_data.laboratorio or animal_vaccination_model.laboratorio
+        animal_vaccination_model.registro_ica =  animal_vaccination_data.registro_ica or animal_vaccination_model.registro_ica
+        animal_vaccination_model.numero_lote =  animal_vaccination_data.numero_lote or animal_vaccination_model.numero_lote
+        animal_vaccination_model.tiempo_retiro =  animal_vaccination_data.tiempo_retiro or animal_vaccination_model.tiempo_retiro
+        animal_vaccination_model.observaciones =  animal_vaccination_data.observaciones or animal_vaccination_model.observaciones
         db_context.session.commit()
 
     @staticmethod

@@ -4,7 +4,7 @@ from app.repositories.users_repository import UserRepository
 from app.repositories.animal_repository import AnimalRepository
 from app.repositories.vaccines_repository import VaccinesRepository
 from app.repositories.animal_vaccination_repository import AnimalVaccinationRepository
-# from app.repositories.birth_repository import BirthRepository
+from app.repositories.birth_repository import BirthRepository
 # from app.repositories.birth_vaccination_repository import BirthVaccinationRepository
 # from app.repositories.cages_birth_repository import CagesBirthsRepository
 # from app.repositories.cages_litters_repository import CagesLittersRepository

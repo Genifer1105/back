@@ -4,7 +4,7 @@ class BirthVaccinationRepository:
 
     __birthVaccination = []
 
- @staticmethod
+    @staticmethod
     def create_birthVaccination(birthVaccination_data : VACUNAS_CAMADAS):
         db_context.session.add(birthVaccination_data)
         db_context.session.commit()

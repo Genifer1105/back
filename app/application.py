@@ -33,6 +33,8 @@ class Application:
         # app.register_blueprint(vaccines_blueprint, url_prefix='/vaccines')
         from app.modules.animals_vaccination import animal_vaccination_blueprint
         app.register_blueprint(animal_vaccination_blueprint, url_prefix='/animals_vaccination')
+        from app.modules.births import birth_blueprint
+        app.register_blueprint(birth_blueprint, url_prefix='/births')
 
     @staticmethod
     def error_handler(error):
