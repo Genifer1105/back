@@ -25,7 +25,7 @@ def update_animal(identificacion_animal):
     data = request.json
     if not data:
         raise BadRequest()
-    raza = Utils.validate_json_field(data, 'raza', True, int)
+    raza = Utils.validate_json_field(data, 'raza', True, str)
     fecha_nacimiento = Utils.validate_json_field(data, 'fecha_nacimiento', True, str)
     id_madre = Utils.validate_json_field(data, 'id_madre', False, int)
     id_padre = Utils.validate_json_field(data, 'id_padre', False, int)
@@ -43,3 +43,8 @@ def get_animals():
 def get_animal(identificacion_animal):
     result = AnimalService.get_animal(identificacion_animal)
     return jsonify(result)
+
+@animal_blueprint.route("/delete_animal/<identificacion_animal>", methods=['DELETE'])
+def delete_animal(identificacion_animal):
+    result = AnimalService.delete_animal(identificacion_animal)
+    return jsonify({"success": True})

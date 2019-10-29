@@ -42,6 +42,10 @@ class AnimalService:
     def get_animal(identificacion_animal: int):
         return AnimalRepository.get_animal(identificacion_animal)
         
+    @staticmethod
+    def delete_animal(identificacion_animal: int):
+        AnimalRepository.delete_animal(identificacion_animal)
+        
 
     @staticmethod
     def __validate_animal_data(identificacion_animal, raza: str, fecha_nacimiento, id_madre, id_padre, procedencia):

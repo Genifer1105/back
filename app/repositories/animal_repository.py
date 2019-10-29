@@ -1,7 +1,7 @@
 from app.repositories import db_context
-from app.models import Animal
+from app.models import Animal, Birth, BirthVaccination, AnimalVaccination
 from app.repositories import Utils
-from sqlalchemy import text
+from sqlalchemy import text, or_
 from sqlalchemy.orm import joinedload
 from werkzeug.exceptions import NotFound, Forbidden
 
@@ -43,6 +43,14 @@ class AnimalRepository:
             raise NotFound('Animal doesn\'t exist')
         return animal_model.serialized
     
+    @staticmethod
+    def delete_animal(identificacion_animal: int):
+        animal_model = AnimalRepository._get_animal_model(identificacion_animal)
+        if not animal_model:
+            raise NotFound('Animal doesn\'t exist')
+        db_context.session.delete(animal_model)
+        db_context.session.commit()
+
 
     @staticmethod
     def _get_animal_model(identificacion_animal: int):

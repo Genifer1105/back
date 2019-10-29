@@ -92,3 +92,7 @@ class BirthService:
     def get_birth(id_camada: int):
         return BirthRepository.get_birth(id_camada)
         
+    @staticmethod
+    def delete_birth(id_camada: int):
+        return BirthRepository.delete_birth(id_camada)
+        

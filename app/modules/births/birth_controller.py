@@ -16,8 +16,8 @@ def create_birth():
     tipo_servicio = Utils.validate_json_field(data, 'tipo_servicio', True,  str)
     identificacion_macho = Utils.validate_json_field(data, 'identificacion_macho', False, int)
     fecha_probable_parto = Utils.validate_json_field(data, 'fecha_probable_parto', True, str)
-    fecha_parto = Utils.validate_json_field(data, 'fecha_parto', True, str)
-    jaula_parto = Utils.validate_json_field(data, 'jaula_parto', True, str)
+    fecha_parto = Utils.validate_json_field(data, 'fecha_parto', False, str)
+    jaula_parto = Utils.validate_json_field(data, 'jaula_parto', False, str)
     numero_lechones_vivos_parto = Utils.validate_json_field(data, 'numero_lechones_vivos_parto', True, int)
     numero_lechones_muertos_parto = Utils.validate_json_field(data, 'numero_lechones_muertos_parto', True, int)
     numero_machos_parto = Utils.validate_json_field(data, 'numero_machos_parto', True, int)
@@ -29,9 +29,9 @@ def create_birth():
     numero_hembras_destete = Utils.validate_json_field(data, 'numero_hembras_destete', False, int)
     numero_machos_destete = Utils.validate_json_field(data, 'numero_machos_destete', False, int)
     numero_muertos_destete = Utils.validate_json_field(data, 'numero_muertos_destete', False, int)
-    dias_lactancia = Utils.validate_json_field(data, 'dias_lactancia', True,  int)
-    peso_total_destete = Utils.validate_json_field(data, 'peso_total_destete', True, int)
-    jaula_destete = Utils.validate_json_field(data, 'jaula_destete', True, str)
+    dias_lactancia = Utils.validate_json_field(data, 'dias_lactancia', False,  int)
+    peso_total_destete = Utils.validate_json_field(data, 'peso_total_destete', False, int)
+    jaula_destete = Utils.validate_json_field(data, 'jaula_destete', False, str)
     fecha_monta_date = Utils.convert_to_date(fecha_monta, "%Y-%m-%d") if fecha_monta is not None else None
     fecha_probable_parto_date = Utils.convert_to_date(fecha_probable_parto, "%Y-%m-%d") if fecha_probable_parto is not None else None
     fecha_parto_date = Utils.convert_to_date(fecha_parto, "%Y-%m-%d") if fecha_parto is not None else None
@@ -59,8 +59,8 @@ def update_birth(id_camada):
     tipo_servicio = Utils.validate_json_field(data, 'tipo_servicio', True,  str)
     identificacion_macho = Utils.validate_json_field(data, 'identificacion_macho', False, int)
     fecha_probable_parto = Utils.validate_json_field(data, 'fecha_probable_parto', True, str)
-    fecha_parto = Utils.validate_json_field(data, 'fecha_parto', True, str)
-    jaula_parto = Utils.validate_json_field(data, 'jaula_parto', True, str)
+    fecha_parto = Utils.validate_json_field(data, 'fecha_parto', False, str)
+    jaula_parto = Utils.validate_json_field(data, 'jaula_parto', False, str)
     numero_lechones_vivos_parto = Utils.validate_json_field(data, 'numero_lechones_vivos_parto', True, int)
     numero_lechones_muertos_parto = Utils.validate_json_field(data, 'numero_lechones_muertos_parto', True, int)
     numero_machos_parto = Utils.validate_json_field(data, 'numero_machos_parto', True, int)
@@ -72,9 +72,9 @@ def update_birth(id_camada):
     numero_hembras_destete = Utils.validate_json_field(data, 'numero_hembras_destete', False, int)
     numero_machos_destete = Utils.validate_json_field(data, 'numero_machos_destete', False, int)
     numero_muertos_destete = Utils.validate_json_field(data, 'numero_muertos_destete', False, int)
-    dias_lactancia = Utils.validate_json_field(data, 'dias_lactancia', True,  int)
-    peso_total_destete = Utils.validate_json_field(data, 'peso_total_destete', True, int)
-    jaula_destete = Utils.validate_json_field(data, 'jaula_destete', True, str)
+    dias_lactancia = Utils.validate_json_field(data, 'dias_lactancia', False,  int)
+    peso_total_destete = Utils.validate_json_field(data, 'peso_total_destete', False, int)
+    jaula_destete = Utils.validate_json_field(data, 'jaula_destete', False, str)
     fecha_monta_date = Utils.convert_to_date(fecha_monta, "%Y-%m-%d") if fecha_monta is not None else None
     fecha_probable_parto_date = Utils.convert_to_date(fecha_probable_parto, "%Y-%m-%d") if fecha_probable_parto is not None else None
     fecha_parto_date = Utils.convert_to_date(fecha_parto, "%Y-%m-%d") if fecha_parto is not None else None
@@ -99,4 +99,9 @@ def get_births():
 @birth_blueprint.route("/get_birth/<id_camada>", methods=['GET'])
 def get_birth(id_camada):
     result = BirthService.get_birth(id_camada)
+    return jsonify(result)
+
+@birth_blueprint.route("/delete_birth/<id_camada>", methods=['DELETE'])
+def delete_birth(id_camada):
+    result = BirthService.delete_birth(id_camada)
     return jsonify(result)

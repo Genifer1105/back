@@ -62,6 +62,18 @@ class BirthRepository:
             raise NotFound('Birth doesn\'t exist')
         return birth_model.serialized
     
+    @staticmethod
+    def delete_birth(id_camada: int):
+        birth_model = BirthRepository._get_birth_model(id_camada)
+        if not birth_model:
+            raise NotFound('Birth doesn\'t exist')
+        BirthRepository.delete_birth_vaccinations(birth_model.id_camada)
+        db_context.session.delete(birth_model)
+        db_context.session.commit()
+
+    @staticmethod
+    def delete_birth_vaccinations(id_camada: int):
+        pass
 
     @staticmethod
     def _get_birth_model(id_camada: int):
