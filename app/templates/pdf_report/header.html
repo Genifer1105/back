@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{static('styles/pdf_template.css', pdf=pdf, root=root)}}">
+</head>
+
+<body style="padding: 0 !important">
+    <div class="title-panel">
+        <h1 class="text-center">
+            {{ report_title }}
+        </h1>
+        <h2 class="text-center">POLITÉCNICO COLOMBIANO JAIME ISAZA CADAVID</h2>
+        <h3 class="text-center">Granja Román Gómez Gómez</h3>
+        <h3 class="text-center">Marinilla | Tel 548 58 43</h3>
+    </div>
+    <hr style="clear: both">
+    <script type="text/javascript" src="{{static('js/substitutePdfVariables.js', pdf=pdf, root=root)}}">
+
+
+
+    </script>
+</body>
+
+</html>

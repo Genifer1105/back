@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{static('styles/pdf_template.css', pdf=pdf, root=root)}}">
+</head>
+
+<body style="padding: 0 !important">
+    <div class="row">
+        <img src="{{static('imgs/footer.png', pdf=pdf, root=root)}}" alt="" style="width: 100%;">
+        <p style="text-align: center"><span name="page"></span> / <span name="topage"></span></p>
+    </div>
+    <script src="{{static('js/substitutePdfVariables.js', pdf=pdf, root=root)}}" type="text/javascript"></script>
+</body>
+
+</html>

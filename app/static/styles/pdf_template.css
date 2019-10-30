@@ -1,0 +1,152 @@
+@font-face {
+  font-family: "source-sans-pro";
+  src: url(SourceSansPro-Regular.ttf);
+  font-weight: lighter;
+}
+@font-face {
+  font-family: "source-sans-pro";
+  src: url(SourceSansPro-Regular.ttf);
+  font-weight: bolder;
+}
+@font-face {
+  font-family: "source-sans-pro";
+  src: url(SourceSansPro-Regular.ttf);
+  font-weight: bold;
+}
+@font-face {
+  font-family: "source-sans-pro";
+  src: url(SourceSansPro-Regular.ttf);
+  font-weight: normal;
+}
+
+body {
+  font-family: "source-sans-pro";
+  padding: 1cm;
+  box-sizing: border-box;
+}
+
+.title {
+  width: 100%;
+  display: block;
+}
+
+.gray-border-left {
+  padding-left: 10px;
+  border-left: 3px solid #6495ed;
+}
+
+.cleartboth {
+  clear: both;
+}
+
+.report-font-title {
+  font-size: 1.1em;
+  color: gray;
+  text-transform: uppercase;
+  font-weight: lighter;
+}
+
+.report-font-value {
+  font-size: 1.1em;
+  font-weight: bolder;
+}
+
+.green-border-left {
+  padding: 10px;
+  border-left: 6px solid #73b236;
+}
+
+.title {
+  font-size: 1.8em;
+  font-weight: 500;
+  color: gray;
+}
+
+.col {
+  margin-top: 10px;
+  width: 50%;
+  float: left;
+}
+
+.row {
+  margin-top: 5px;
+  clear: both;
+  display: block;
+  width: 100%;
+}
+
+.row::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.new-page {
+  page-break-before: always;
+}
+
+.center-middle {
+  margin: auto;
+  display: block;
+  left: 0;
+  right: 0;
+}
+
+.center-imgs {
+  margin: auto;
+  width: 80%;
+}
+
+.text-gray {
+  color: gray;
+}
+
+.list-none {
+  list-style: none;
+}
+
+.gray-border-left {
+  border-left: 4px solid #f2f2f2;
+  padding: 6px;
+}
+
+.break-long-words {
+  word-wrap: break-all;
+}
+
+.footer-text {
+  font-size: 1.5em;
+  font-weight: bolder;
+  color: black;
+}
+* {
+  overflow: visible !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.keep-together {
+  page-break-inside: avoid !important;
+}
+
+.break-after {
+  page-break-after: always !important;
+}
+
+.break-before {
+  page-break-before: always !important;
+}
+
+
+
+.title-panel {
+  background: #196844;
+  color: #ffffff;
+  padding: 20px;
+}
+
+.title-panel * {
+  margin: 5px;
+}

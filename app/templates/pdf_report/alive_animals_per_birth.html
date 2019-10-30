@@ -1,0 +1,46 @@
+<html>
+
+<head>
+    <title>{{_id}}</title>
+    <meta charset="utf-8"> {% block styles %}
+    <link rel="stylesheet" href="{{static('styles/pdf_template.css', pdf=pdf, root=root)}}">
+    <link rel="stylesheet" href="{{static('styles/utils.css', pdf=pdf, root=root)}}"> {% endblock %}
+</head>
+
+<body>
+    <img src="{{static('imgs/logo-institucion.png', pdf=pdf, root=root)}}" style="opacity: 0.08; width: 100%; position: fixed" class="center-middle" >
+    {% block body %}
+    <table style="width: 100%" border="1px">
+        <thead>
+            <tr>
+                <th>
+                    identificacion animal
+                </th>
+                <th>
+                    id camada
+                </th>
+                <th>
+                    total nacidos
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in listItems %}
+            <tr>
+                <td>
+                    {{ item.identificacion_animal }}
+                </td>
+                <td>
+                    {{ item.id_camada }}
+                </td>
+                <td>
+                    {{ item.total }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}
+</body>
+
+</html>
