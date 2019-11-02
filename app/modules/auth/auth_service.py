@@ -1,7 +1,8 @@
 from app.models import User
 from app.repositories import UserRepository
 from app.utils import Utils
-from werkzeug.exceptions import Conflict, NotFound
+from app.auth_utils import AuthUtils
+from werkzeug.exceptions import Conflict, NotFound, Unauthorized
 
 class AuthService:
 
@@ -17,13 +18,28 @@ class AuthService:
             apellido1 = str.strip(apellido1),
             apellido2 = apellido2 if not apellido2 else str.strip(apellido2),
             correo = str.strip(correo),
-            contrasena = contrasena,
+            contrasena = AuthUtils.hash_password(contrasena),
             id_perfil = id_perfil,
             telefono = telefono if not telefono else str.strip(telefono)
         )
+        print('user password', user.contrasena)
         UserRepository.create_user(user)
         userCreated = UserRepository.get_user(identificacion) 
-        return userCreated.serialize()
+        return userCreated.serialized
+
+    @staticmethod
+    def login(identificacion: int, contrasena: str):
+        password_checked = False
+        user_data: User = None
+        try:
+            user_data = UserRepository.get_user(identificacion)
+            password_checked = AuthUtils.compare_password(user_data.contrasena, contrasena)
+        except NotFound:
+            pass
+        if not password_checked:
+            raise Unauthorized('Wrong user or password')
+        return user_data.serialized
+
 
     @staticmethod
     def update_user(identificacion: int, nombre: str, apellido1: str, apellido2: str, correo: str, id_perfil: int, telefono: str):
@@ -42,7 +58,7 @@ class AuthService:
         )
         UserRepository.update_user(user)
         userUpdated = UserRepository.get_user(identificacion) 
-        return userUpdated.serialize()
+        return userUpdated.serialized
 
     @staticmethod
     def get_users():

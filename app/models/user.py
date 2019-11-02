@@ -14,7 +14,8 @@ class User(db_context.Model):
     contrasena = db_context.Column(db_context.String(20), nullable=True)
     id_perfil = db_context.Column(db_context.Integer, nullable=False)
 
-    def serialize(self):
+    @property
+    def serialized(self):
         return {
             "identificacion": self.identificacion,
             "nombre": self.nombre,
@@ -22,5 +23,6 @@ class User(db_context.Model):
             "apellido2": self.apellido2,
             "correo": self.correo,
             "telefono": self.telefono,
-            "id_perfil": self.id_perfil
+            "id_perfil": self.id_perfil,
+            "contrasena": self.contrasena
         }

@@ -48,6 +48,8 @@ class Application:
         app.register_blueprint(birth_blueprint, url_prefix='/births')
         from app.modules.reports.reports_controller import reports_bluerpint
         app.register_blueprint(reports_bluerpint, url_prefix='/reports')
+        from app.modules.births_vaccination import birth_vaccination_blueprint
+        app.register_blueprint(birth_vaccination_blueprint, url_prefix='/births_vaccination')
 
     @staticmethod
     def error_handler(error):

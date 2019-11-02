@@ -27,7 +27,6 @@ class UserRepository:
 
     @staticmethod
     def get_user(identificacion: int):
-        print('get_user', identificacion)
         user: User = User.query.filter_by(identificacion=identificacion).first()
         if not user:
             raise NotFound('user doesn\'t exist')

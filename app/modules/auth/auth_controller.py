@@ -10,16 +10,27 @@ def create_user():
     user_data = request.json
     if not user_data:
         raise BadRequest()
-    identificacion = Utils.validate_json_field(user_data, 'identificacion', int, True)
-    nombre = Utils.validate_json_field(user_data, 'nombre', str, True)
-    apellido1 = Utils.validate_json_field(user_data, 'apellido1', str, True)
-    apellido2 = Utils.validate_json_field(user_data, 'apellido2', str, False)
-    correo = Utils.validate_json_field(user_data, 'correo', str, True)
-    contrasena = Utils.validate_json_field(user_data, 'contrasena', str, True)
-    id_perfil = Utils.validate_json_field(user_data, 'id_perfil', int, True)
-    telefono = Utils.validate_json_field(user_data, 'telefono', str, False)
+    identificacion = Utils.validate_json_field(user_data, 'identificacion', True, int)
+    nombre = Utils.validate_json_field(user_data, 'nombre', True, str)
+    apellido1 = Utils.validate_json_field(user_data, 'apellido1', True, str)
+    apellido2 = Utils.validate_json_field(user_data, 'apellido2', False, str)
+    correo = Utils.validate_json_field(user_data, 'correo', True, str)
+    contrasena = Utils.validate_json_field(user_data, 'contrasena', True, str)
+    id_perfil = Utils.validate_json_field(user_data, 'id_perfil', True, int)
+    telefono = Utils.validate_json_field(user_data, 'telefono', False, str)
     data = AuthService.create_user(identificacion, nombre, apellido1, apellido2, correo, contrasena, id_perfil, telefono)
     return jsonify({ "success": True, "data": data })
+
+@auth_blueprint.route('/login', methods=['POST'])
+def login():
+    login_data = request.json
+    if not login_data:
+        raise BadRequest()
+    identificacion = Utils.validate_json_field(login_data, 'identificacion', True, int)
+    contrasena = Utils.validate_json_field(login_data, 'contrasena', True, str)
+    data = AuthService.login(identificacion, contrasena)
+    return jsonify({"data": data, "success": True})
+        
 
 @auth_blueprint.route('/update_user/<identificacion>', methods=['PUT'])
 def update_user(identificacion):

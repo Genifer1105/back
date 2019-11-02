@@ -10,7 +10,6 @@ class Utils:
     
     @staticmethod
     def validate_field(field, field_key: str, field_type: type, required: bool):
-        print("field_type:", field_type)
         if field is None:
             if required:
                 raise BadRequest(f"field { field_key } is required")
