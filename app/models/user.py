@@ -3,7 +3,7 @@ from app.repositories import db_context
 class User(db_context.Model):
 
 
-    __tablename__ = "Usuario"
+    __tablename__ = "usuario"
 
     identificacion = db_context.Column(db_context.Integer, primary_key=True)
     nombre = db_context.Column(db_context.String(100), nullable=False)
@@ -13,6 +13,7 @@ class User(db_context.Model):
     telefono = db_context.Column(db_context.String(20), nullable=True)
     contrasena = db_context.Column(db_context.String(20), nullable=True)
     id_perfil = db_context.Column(db_context.Integer, nullable=False)
+    p = db_context.Column(db_context.Integer, nullable=False)
 
     @property
     def serialized(self):

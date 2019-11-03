@@ -42,7 +42,7 @@ class UserRepository:
 
     @staticmethod
     def get_user_data(identificacion: int):
-        query = text('select u.identificacion, u.nombre, u.apellido1, u.apellido2, u.correo, u.telefono, p.descripcion as perfil, u.id_perfil from usuario u, perfil p where u.id_perfil = p.id_perfil and u.identificacion = :identificacion')
+        query = text('select u.identificacion, u.nombre, u.apellido1, u.apellido2, u.correo, u.telefono, p.descripcion as perfil, u.id_perfil from ppi.usuario u, ppi.perfil p where u.id_perfil = p.id_perfil and u.identificacion = :identificacion')
         result_set = db_context.engine.execute(query, identificacion= identificacion)
         if result_set.rowcount == 0:
             raise NotFound('user doesn\'t exist')
@@ -52,7 +52,7 @@ class UserRepository:
 
     @staticmethod
     def get_users():
-        query = text('select u.identificacion, u.nombre, u.apellido1, u.apellido2, u.correo, u.telefono, p.descripcion as perfil, u.id_perfil from usuario u, perfil p where u.id_perfil = p.id_perfil')
+        query = text('select u.identificacion, u.nombre, u.apellido1, u.apellido2, u.correo, u.telefono, p.descripcion as perfil, u.id_perfil from ppi.usuario u, ppi.perfil p where u.id_perfil = p.id_perfil')
         result = db_context.engine.execute(query)
         return [Utils.row2dict(user) for user in result]
 
