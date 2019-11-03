@@ -61,6 +61,8 @@ class AnimalVaccinationRepository:
     @staticmethod
     def get_animal_vaccinations_item(identificacion_animal: int, vacuna: str, fecha_programada):
         animal_model = AnimalVaccinationRepository._get_animal_vaccination_model(identificacion_animal, vacuna, fecha_programada)
+        if not animal_model:
+            raise NotFound('animal vaccination item not found')
         return animal_model.serialized
 
     @staticmethod

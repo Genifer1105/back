@@ -1,0 +1,1 @@
+from app.decorators.require_token import authorize

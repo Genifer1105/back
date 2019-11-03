@@ -1,7 +1,7 @@
 from app.models import User
 from app.repositories import Utils
 from app.repositories import db_context
-from sqlalchemy import text
+from sqlalchemy import text, or_
 from werkzeug.exceptions import NotFound
 
 class UserRepository:
@@ -28,6 +28,13 @@ class UserRepository:
     @staticmethod
     def get_user(identificacion: int):
         user: User = User.query.filter_by(identificacion=identificacion).first()
+        if not user:
+            raise NotFound('user doesn\'t exist')
+        return user
+
+    @staticmethod
+    def get_user_by_id_or_email(identificacion: int, correo: str):
+        user: User = User.query.filter(or_(User.identificacion==identificacion, User.correo==correo)).first()
         if not user:
             raise NotFound('user doesn\'t exist')
         return user

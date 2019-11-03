@@ -2,8 +2,19 @@ from flask import Blueprint, jsonify, request
 from app.modules.auth import AuthService
 from werkzeug.exceptions import BadRequest
 from app.utils import Utils
+from app.decorators import authorize
 
 auth_blueprint = Blueprint('/auth', __name__)
+
+@auth_blueprint.route('/admin_required')
+@authorize(1)
+def admin_required():
+    return jsonify({ "success": True })
+
+@auth_blueprint.route('/not_admin_required')
+@authorize(2)
+def not_admin_required():
+    return jsonify({ "success": True })
 
 @auth_blueprint.route('/create_user', methods=['POST'])
 def create_user():
@@ -26,10 +37,11 @@ def login():
     login_data = request.json
     if not login_data:
         raise BadRequest()
-    identificacion = Utils.validate_json_field(login_data, 'identificacion', True, int)
+    identificacion = Utils.validate_json_field(login_data, 'identificacion', False, int)
     contrasena = Utils.validate_json_field(login_data, 'contrasena', True, str)
-    data = AuthService.login(identificacion, contrasena)
-    return jsonify({"data": data, "success": True})
+    correo = Utils.validate_json_field(login_data, 'correo', identificacion is None, str)
+    data, token = AuthService.login(identificacion, correo, contrasena)
+    return jsonify({"data": data, "success": True, "token": token})
         
 
 @auth_blueprint.route('/update_user/<identificacion>', methods=['PUT'])

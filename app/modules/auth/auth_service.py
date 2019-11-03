@@ -3,6 +3,7 @@ from app.repositories import UserRepository
 from app.utils import Utils
 from app.auth_utils import AuthUtils
 from werkzeug.exceptions import Conflict, NotFound, Unauthorized
+from flask_jwt_extended import create_access_token
 
 class AuthService:
 
@@ -28,17 +29,18 @@ class AuthService:
         return userCreated.serialized
 
     @staticmethod
-    def login(identificacion: int, contrasena: str):
+    def login(identificacion: int, correo: str, contrasena: str):
         password_checked = False
         user_data: User = None
         try:
-            user_data = UserRepository.get_user(identificacion)
+            user_data = UserRepository.get_user_by_id_or_email(identificacion, correo)
             password_checked = AuthUtils.compare_password(user_data.contrasena, contrasena)
         except NotFound:
             pass
         if not password_checked:
             raise Unauthorized('Wrong user or password')
-        return user_data.serialized
+        token = create_access_token({ "identificacion": identificacion, "profile": user_data.id_perfil })
+        return user_data.serialized, token
 
 
     @staticmethod

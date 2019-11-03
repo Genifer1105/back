@@ -2,6 +2,7 @@ from flask import Flask, jsonify, url_for
 from flask_sqlalchemy import SQLAlchemy
 from app.repositories import db_context    
 from flask_cors import CORS
+from flask_jwt_extended import JWTManager
 from werkzeug.exceptions import HTTPException
 
 class Application:
@@ -13,6 +14,7 @@ class Application:
         if not Application.app:
             Application.app = Flask(__name__, template_folder='templates')
             CORS(Application.app)
+            JWTManager(Application.app)
             Application.app.config.from_object('app.config.Configuration')
             Application.app.jinja_env.globals['static'] = Application.static_file
             db_context.init_app(Application.app)

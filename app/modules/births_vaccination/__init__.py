@@ -1,0 +1,2 @@
+from app.modules.births_vaccination.birth_vaccination_service import BirthVaccinationService
+from app.modules.births_vaccination.birth_vaccination_controller import birth_vaccination_blueprint

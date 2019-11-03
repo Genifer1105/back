@@ -23,6 +23,5 @@ class User(db_context.Model):
             "apellido2": self.apellido2,
             "correo": self.correo,
             "telefono": self.telefono,
-            "id_perfil": self.id_perfil,
-            "contrasena": self.contrasena
+            "id_perfil": self.id_perfil
         }
