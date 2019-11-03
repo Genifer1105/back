@@ -39,7 +39,7 @@ class AuthService:
             pass
         if not password_checked:
             raise Unauthorized('Wrong user or password')
-        token = create_access_token({ "identificacion": identificacion, "profile": user_data.id_perfil })
+        token = create_access_token({ "identificacion": user_data.identificacion, "profile": user_data.id_perfil })
         return user_data.serialized, token
 
 

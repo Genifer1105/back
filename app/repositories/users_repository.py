@@ -22,6 +22,7 @@ class UserRepository:
         user.apellido1 = user_data.apellido1 or user.apellido1
         user.apellido2 = user_data.apellido2 or user.apellido2
         user.correo = user_data.correo or user.correo
+        user.id_perfil = user_data.id_perfil or user.id_perfil
         user.telefono = user_data.telefono or user.telefono
         db_context.session.commit()
 
