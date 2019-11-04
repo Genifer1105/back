@@ -13,7 +13,6 @@ class User(db_context.Model):
     telefono = db_context.Column(db_context.String(20), nullable=True)
     contrasena = db_context.Column(db_context.String(20), nullable=True)
     id_perfil = db_context.Column(db_context.Integer, nullable=False)
-    p = db_context.Column(db_context.Integer, nullable=False)
 
     @property
     def serialized(self):
