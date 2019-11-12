@@ -6,7 +6,6 @@ from flask_jwt_extended import verify_jwt_in_request, get_jwt_identity
 
 def authorize(profile=None):
     def authorize_decorator(fn):
-        print('(decorator)'*50)
         @wraps(fn)
         def wrapper(*args, **kwargs):
             verify_jwt_in_request()

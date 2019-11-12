@@ -20,7 +20,7 @@
 }
 
 body {
-  font-family: "source-sans-pro";
+  font-family: "arial";
   padding: 1cm;
   box-sizing: border-box;
 }
@@ -149,4 +149,18 @@ body {
 
 .title-panel * {
   margin: 5px;
+}
+
+table, th, td {
+  text-align: left;
+  border-collapse: collapse;
+  border: solid 1px black;
+}
+
+th, td {
+  padding: 10px;
+}
+
+th {
+  font-weight: bolder;
 }

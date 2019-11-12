@@ -15,40 +15,37 @@
         {% for item in listItems %}
         <li>
             <div>
-                <h2>Identificación animal: {{ item.identificacion_animal }}</h2>
+                <h2>{{ item.month_label }} {{ item.year }} <small>(Total nacidos vivos: {{ item.total_born }})</small></h2>
+                <h3>Parto con mayor número de nacidos vivos</h3>
                 <table style="width: 100%">
-                    <tr>
-                        <th>Total partos</th>
-                        <th>Total nacidos</th>
-                        <th>Total nacidos vivos</th>
-                        <th>Total nacidos muertos</th>
-                    </tr>
-                    <tr>
-                        <td>{{ item.total_births }}</td>
-                        <td>{{ item.total }}</td>
-                        <td>{{ item.total_alive }}</td>
-                        <td>{{ item.total_dead }}</td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>Fecha del parto</th>
+                            <th>Id camada</th>
+                            <th>Total vivos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ item.max_alive_birth_date }}</td>
+                            <td>{{ item.max_alive_birth }}</td>
+                            <td>{{ item.max_alive_born }}</td>
+                        </tr>
+                    </tbody>
                 </table>
                 <h3>Listado de partos</h3>
-                <table style="width: 100%">
+                <table style="width: 100%" border="1px">
 
                     <thead>
                         <tr>
                             <th>
-                                Id camada
-                            </th>
-                            <th>
                                 Fecha del parto
                             </th>
                             <th>
+                                Id camada
+                            </th>
+                            <th>
                                 Total vivos
-                            </th>
-                            <th>
-                                Total muertos
-                            </th>
-                            <th>
-                                Total nacidos
                             </th>
                         </tr>
                     </thead>
@@ -56,16 +53,10 @@
                         {% for birthItem in item.births %}
                         <tr>
                             <td>
-                                {{ birthItem.id_camada }}
-                            </td>
-                            <td>
                                 {{ birthItem.date }}
                             </td>
                             <td>
-                                {{ birthItem.total_alive }}
-                            </td>
-                            <td>
-                                {{ birthItem.total_dead }}
+                                {{ birthItem.id_camada }}
                             </td>
                             <td>
                                 {{ birthItem.total }}
