@@ -2,10 +2,12 @@ from flask import Blueprint, jsonify, request
 from app.modules.births import BirthService
 from werkzeug.exceptions import BadRequest
 from app.utils import Utils
+from app.decorators import authorize
 
 birth_blueprint = Blueprint('/births', __name__)
 
 @birth_blueprint.route('/create_birth', methods=['POST'])
+@authorize()
 def create_birth():
     data = request.json
     if not data:
@@ -49,6 +51,7 @@ def create_birth():
     return jsonify({ "success": True, "data": result })
 
 @birth_blueprint.route('/update_birth/<id_camada>', methods=['PUT'])
+@authorize()
 def update_birth(id_camada):
     data = request.json
     if not data:
@@ -92,16 +95,19 @@ def update_birth(id_camada):
     return jsonify({ "success": True, "data": result })
 
 @birth_blueprint.route("/get_births", methods=['GET'])
+@authorize()
 def get_births():
     payload = BirthService.get_births()
     return jsonify(payload)
 
 @birth_blueprint.route("/get_birth/<id_camada>", methods=['GET'])
+@authorize()
 def get_birth(id_camada):
     result = BirthService.get_birth(id_camada)
     return jsonify(result)
 
 @birth_blueprint.route("/delete_birth/<id_camada>", methods=['DELETE'])
+@authorize()
 def delete_birth(id_camada):
     result = BirthService.delete_birth(id_camada)
     return jsonify(result)

@@ -3,10 +3,12 @@ from app.modules.animals_vaccination import AnimalVaccinationService
 from werkzeug.exceptions import BadRequest
 from app.utils import Utils
 from datetime import datetime
+from app.decorators import authorize
 
 animal_vaccination_blueprint = Blueprint('/animals_vaccination', __name__)
 
 @animal_vaccination_blueprint.route('/create_animal_vaccination', methods=['POST'])
+@authorize()
 def create_animal():
     data = request.json
     if not data:
@@ -34,6 +36,7 @@ def create_animal():
     return jsonify({ "success": True, "data": result })
 
 @animal_vaccination_blueprint.route('/update_animal_vaccination/<identificacion_animal>/<vacuna>/<fecha_programada>', methods=['PUT'])
+@authorize()
 def update_animal(identificacion_animal, vacuna, fecha_programada):
     data = request.json
     if not data:
@@ -62,6 +65,7 @@ def update_animal(identificacion_animal, vacuna, fecha_programada):
 
 
 @animal_vaccination_blueprint.route('/get_animal_vaccination_item/<identificacion_animal>/<vacuna>/<fecha_programada>', methods=['GET'])
+@authorize()
 def get_animal_vaccination_item(identificacion_animal, vacuna, fecha_programada):
     # identificacion_animal = request.args.get('identificacion_animal')
     # vacuna = request.args.get('vacuna')
@@ -74,12 +78,14 @@ def get_animal_vaccination_item(identificacion_animal, vacuna, fecha_programada)
     return jsonify(result)
 
 @animal_vaccination_blueprint.route("/get_animal_vaccinations/<identificacion_animal>", methods=['GET'])
+@authorize()
 def get_animal_vaccinations(identificacion_animal):
     identificacion_animal = Utils.validate_field(identificacion_animal, 'identificacion_animal', str, True)
     result = AnimalVaccinationService.get_animal_vaccinations(identificacion_animal)
     return jsonify(result)
 
 @animal_vaccination_blueprint.route("/get_animals_vaccinations", methods=['GET'])
+@authorize()
 def get_animals():
     payload = AnimalVaccinationService.get_animals_vaccinations()
     return jsonify(payload)

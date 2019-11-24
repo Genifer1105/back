@@ -1,5 +1,7 @@
 from werkzeug.exceptions import BadRequest
 from datetime import datetime
+import string
+import random
 
 class Utils:
 
@@ -34,3 +36,9 @@ class Utils:
             return 'float'
         elif field_type == bool:
             return 'boolean'
+
+    @staticmethod 
+    def get_random_string(length: int):
+        characters = string.ascii_lowercase + string.digits
+        random_string = ''.join(random.choice(characters) for i in range(length))
+        return random_string

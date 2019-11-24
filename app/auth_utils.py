@@ -4,8 +4,9 @@ class AuthUtils:
 
     @staticmethod
     def hash_password(password: str):
-        return generate_password_hash(password).decode('utf-8')
+        return generate_password_hash(password.lower()).decode('utf-8')
     
     @staticmethod
     def compare_password(password_hash: str, password: str):
-        return check_password_hash(password_hash, password)
+        print({'password': password, 'password_hash': password_hash})
+        return check_password_hash(password_hash, password.lower())

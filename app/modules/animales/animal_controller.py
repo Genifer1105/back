@@ -2,10 +2,12 @@ from flask import Blueprint, jsonify, request
 from app.modules.animales import AnimalService
 from werkzeug.exceptions import BadRequest
 from app.utils import Utils
+from app.decorators import authorize
 
 animal_blueprint = Blueprint('/animales', __name__)
 
 @animal_blueprint.route('/create_animal', methods=['POST'])
+@authorize()
 def create_animal():
     data = request.json
     if not data:
@@ -21,6 +23,7 @@ def create_animal():
     return jsonify({ "success": True, "data": result })
 
 @animal_blueprint.route('/update_animal/<identificacion_animal>', methods=['PUT'])
+@authorize()
 def update_animal(identificacion_animal):
     data = request.json
     if not data:
@@ -35,16 +38,19 @@ def update_animal(identificacion_animal):
     return jsonify({ "success": True, "data": result })
 
 @animal_blueprint.route("/get_animals", methods=['GET'])
+@authorize()
 def get_animals():
     payload = AnimalService.get_animals()
     return jsonify(payload)
 
 @animal_blueprint.route("/get_animal/<identificacion_animal>", methods=['GET'])
+@authorize()
 def get_animal(identificacion_animal):
     result = AnimalService.get_animal(identificacion_animal)
     return jsonify(result)
 
 @animal_blueprint.route("/delete_animal/<identificacion_animal>", methods=['DELETE'])
+@authorize()
 def delete_animal(identificacion_animal):
     result = AnimalService.delete_animal(identificacion_animal)
     return jsonify({"success": True})
