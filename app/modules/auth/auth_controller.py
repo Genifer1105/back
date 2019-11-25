@@ -48,7 +48,7 @@ def login():
         
 
 @auth_blueprint.route('/update_user/<identificacion>', methods=['PUT'])
-@authorize(1)
+@authorize([1])
 def update_user(identificacion):
     user_data = request.json
     if not user_data:
@@ -64,13 +64,13 @@ def update_user(identificacion):
     return jsonify({ "success": True, "data": data })
 
 @auth_blueprint.route("/get_users", methods=['GET'])
-@authorize(1)
+@authorize([1])
 def get_users():
     payload = AuthService.get_users()
     return jsonify(payload)
 
 @auth_blueprint.route("/get_user/<identificacion>", methods=['GET'])
-@authorize(1)
+@authorize([1])
 def get_user(identificacion):
     payload = AuthService.get_user(identificacion)
     return jsonify(payload)
